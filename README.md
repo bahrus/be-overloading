@@ -18,6 +18,7 @@ But:
    2.  Initialize properties from the environment (e.g. sessionStorage, IndexedDB, link preconnect tags, etc.)
 2. Using ES Modules can be done, but is clunky:
 
+```html
 <output test='hello' contenteditable onchange="test()" oninput="
       (async () => {
           console.log(getAttribute('test'));
@@ -27,6 +28,8 @@ But:
       })()
       
       ">starting value</output>
+```
+
 
 be-overloading helps with these limitations.
 
