@@ -92,6 +92,10 @@ e => {
 ">Tumble out of bed</button>
 ```
 
+<!--
+checkmate?
+-->
+
 This also works:
 
 ```html
