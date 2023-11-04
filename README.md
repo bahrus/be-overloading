@@ -45,9 +45,13 @@ Not quite as compact as using the platform, but...
 ```
 
 <!--
-If no => is found, wrap inside
+If doesn't start with open parenthesis,
+
 export tbd = async $0 => {
-    ...
+    $0.addEventListener('click', e => {
+        ...
+    })
+    
 } 
 
 and pass in the enhanced element for $0.
@@ -68,16 +72,18 @@ If no event is specified, the assumption is on click (except for input element, 
 
 ```html
 <button be-overloading onload="
-$0.addEventListener('click', e => {
-    $0.textContent = 'Try to come to life';
-})
+({$0}) => {
+    $0.addEventListener('click', e => {
+        $0.textContent = 'Try to come to life';
+    });
+} 
 ">Tumble out of bed</button>
 ```
 
 <!--
-What is the pattern that tells us to do the same as above?  Here we have => buried deep within
+Starts with open parenthesis, so minimal wrapping:
+export const tbd = async ...
 
-So amend above -- if doesn't start with [\w+] => ?
 -->
 
 This also works:
@@ -93,7 +99,16 @@ e => {
 ```
 
 <!--
-checkmate?
+Doesn't start with parenthesis,
+starts with e => 
+
+Wrap with 
+
+export const tbd = async ({$0}) => {
+    $0.addEventListener('click', 
+        ...
+    );
+}
 -->
 
 This also works:
