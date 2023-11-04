@@ -7,7 +7,7 @@ Script HTML elements like yore, with support for ES modules.
 This works, without any help from be-overloading:
 
 ```html
-<button be-overloading onclick="textContent = 'Try to come to life';"
+<button onclick="textContent = 'Try to come to life';"
 >Tumble out of bed</button>
 ```
 
@@ -20,7 +20,7 @@ But:
 2. Using ES Modules can be done, but is clunky:
 
 ```html
-<output test='hello' contenteditable onchange="test()" oninput="
+<output test='hello' contenteditable oninput="
       (async () => {
           console.log(getAttribute('test'));
           const {calculator} = await import('./calculator.js');
@@ -95,7 +95,7 @@ This also works:
 ## Example 5 [TODO]
 
 ```html
-<button be-overloading='on click.  On mouse over.'
+<button be-overloading='on click.  On mouseover.'
  onload="
     [
         e => $0.textContent = 'Try to come to life',
