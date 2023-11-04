@@ -14,8 +14,8 @@ This works, without any help from be-overloading:
 But:
 
 1. There is no event (apparently) that triggers the moment the element becomes connected to the DOM fragment.  We might want to do things other than attach event handlers that are built in to the platform.  For example, we might want to:
-  1.  Attach event handlers with custom names (TIL, no need for [customEvent](https://github.com/webcomponents-cg/community-protocols/issues/12#issuecomment-872415080) object, sounds quite promising).
-  2.  
+   1.  Attach event handlers with custom names (TIL, no need for [customEvent](https://github.com/webcomponents-cg/community-protocols/issues/12#issuecomment-872415080) object, sounds quite promising).
+   2.  Initialize properties from the environment (e.g. sessionStorage, IndexedDB, link preconnect tags, etc.)
 2. Using ES Modules can be done, but is clunky:
 
 <output test='hello' contenteditable onchange="test()" oninput="
