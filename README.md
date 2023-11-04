@@ -74,6 +74,11 @@ $0.addEventListener('click', e => {
 ">Tumble out of bed</button>
 ```
 
+<!--
+What is the pattern that tells us to do the same as above?  Here we have => buried deep within
+
+So amend above -- if doesn't start with [\w+] => ?
+-->
 
 This also works:
 
