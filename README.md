@@ -44,6 +44,15 @@ Not quite as compact as using the platform, but...
 ">Tumble out of bed</button>
 ```
 
+<!--
+If no => is found, wrap inside
+export tbd = async $0 => {
+    ...
+} 
+
+and pass in the enhanced element for $0.
+-->
+
 If no event is specified, the assumption is on click (except for input element, form element).  So now, in the example below, we present markup that is as close as we will get to using the platform as far as verbosity:
 
 ## Example 2 [TODO]
