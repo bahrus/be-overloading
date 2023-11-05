@@ -51,9 +51,11 @@ If the onload text doesn't start with either an open parenthesis, or an open bra
 ```JavaScript
 export const onload = async ($0, names, context) => {
     for(const name of names){
-        $0.addEventListener(eventType, e => {
+        const ab = new AbortController();
+        context.abortControllers[name] = ab;
+        $0.addEventListener(name, e => {
             $0.textContent = 'Try to come to life';
-        });
+        }, {signal: ab.signal});
     }
 
 }
