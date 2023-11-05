@@ -1,10 +1,38 @@
 {
   "name": "be-overloading",
   "version": "0.0.0",
+  "keywords": [
+    "web-components",
+    "web-component",
+    "custom-element",
+    "custom-elements",
+    "decorate",
+    "enhancement",
+    "behavior",
+    "directive"
+  ],
   "description": "Script HTML elements like yore, with support for ES modules.",
   "main": "index.js",
+  "files": [
+    "*.js",
+    "types.d.ts"
+  ],
+  "types": "types.d.ts",
+  "dependencies": {
+    "be-enhanced": "0.0.55",
+    "be-hive": "0.0.123",
+    "trans-render": "0.0.707",
+    "xtal-element": "0.0.579"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.39.0",
+    "may-it-serve": "0.0.6"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "playwright test",
+    "serve": "node node_modules/may-it-serve/serve.js",
+    "safari": "npx playwright wk http://localhost:3030",
+    "update": "ncu -u && npm install"
   },
   "author": "",
   "license": "MIT"
