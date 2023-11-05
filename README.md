@@ -44,6 +44,20 @@ Not quite as compact as using the platform, but...
 ">Tumble out of bed</button>
 ```
 
+What this does, behind the scenes:
+
+If the onload text doesn't start with either an open parenthesis, or an open bracket, it does quite a bit of wrapping.  It turns the previous script into:
+
+```JavaScript
+export const onload = async ({$0}) => {
+    $0.addEventListener('click', e => {
+        $0.textContent = 'Try to come to life';
+    });
+}
+```
+
+*be-overloading* invokes onload right away.  It then detaches itself from memory, as its work is done.
+
 <!--
 If doesn't start with open parenthesis,
 
