@@ -49,8 +49,8 @@ What this does, behind the scenes:
 If the onload text doesn't start with either an open parenthesis, or an open bracket, it does quite a bit of wrapping.  It turns the previous script into:
 
 ```JavaScript
-export const onload = async ({$0, eventTypes}) => {
-    for(const eventType of eventTypes){
+export const onload = async ({$0, names, context}) => {
+    for(const name of names){
         $0.addEventListener(eventType, e => {
             $0.textContent = 'Try to come to life';
         });
@@ -61,13 +61,13 @@ export const onload = async ({$0, eventTypes}) => {
 
 *be-overloading* invokes onload right away, passing in the element it adorns, and the event type specified in the attribute.  It then detaches itself from memory, as its work is done.
 
-The exampe above is meant to save the developer from a number of common keystrokes.  But for if the developer wants to do anything off the beaten track, we have the following more verbose example:
+The example above is meant to save the developer from a number of common keystrokes.  But for if the developer wants to take the reigns, to do anything off the beaten track, we have the following more verbose example:
 
 ## Example 2 [TODO]
 
 ```html
 <button be-overloading onload="
-({$0}) => {
+({$0, names, context}) => {
     $0.addEventListener('click', e => {
         $0.textContent = 'Try to come to life';
     });
@@ -80,7 +80,7 @@ What this does behind the scenes:  Since the script begins with an open parenthe
 
 This also works:
 
-## Example 4 [TODO]
+## Example 3 [TODO]
 
 ```html
 <button be-overloading="with click." onload="
@@ -98,7 +98,7 @@ It wraps such logic into the same expanded script, yada yada.
 This also works:
 
 ```html
-<button be-overloading="on click, mouseover." onload="
+<button be-overloading="with click, mouseover." onload="
 e => {
     $0.textContent = 'Try to come to life';
 }
@@ -107,24 +107,7 @@ e => {
 
 Both events (click, mouseover) will invoke the same common script.
 
-The wrapped code looks as follows:
-
-
-This also works:
-
-## Example 5 [TODO]
-
-```html
-<button be-overloading='on click.  On mouseover.'
- onload="
-    [
-        e => $0.textContent = 'Try to come to life',
-        e => $0.textContent = 'Toss and turn'
-    ]
-">Tumble out of bed</button>
-```
-
-Here the script starts with a [].  In this case, it wraps the code as follows:
+The developer can add conditional logic within to do different things based on which event type was triggered.
 
 
 
