@@ -49,7 +49,7 @@ What this does, behind the scenes:
 If the onload text doesn't start with either an open parenthesis, or an open bracket, it does quite a bit of wrapping.  It turns the previous script into:
 
 ```JavaScript
-export const onload = async ({$0, names, context}) => {
+export const onload = async ($0, names, context) => {
     for(const name of names){
         $0.addEventListener(eventType, e => {
             $0.textContent = 'Try to come to life';
@@ -67,7 +67,7 @@ The example above is meant to save the developer from a number of common keystro
 
 ```html
 <button be-overloading onload="
-({$0, names, context}) => {
+($0, names, context) => {
     $0.addEventListener('click', e => {
         $0.textContent = 'Try to come to life';
     });

@@ -1,0 +1,19 @@
+{
+	"compilerOptions": {
+		"target": "ESNext",
+		"module":"ESNext",
+		"sourceMap": false,
+		"experimentalDecorators": false,
+		"newLine": "LF",
+		"strict": true,
+		"lib": ["ESNext", "ESNext.String", "DOM"]
+	},
+	"files":[
+		"be-overloading.ts"
+
+	],
+	"exclude":[
+		"node_modules",
+	]
+
+}
