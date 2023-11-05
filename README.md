@@ -39,7 +39,7 @@ be-overloading helps with these limitations.
 Not quite as compact as using the platform, but...
 
 ```html
-<button be-overloading="on click." onload="
+<button be-overloading="with click." onload="
     $0.textContent = 'Try to come to life';
 ">Tumble out of bed</button>
 ```
@@ -61,13 +61,13 @@ export const onload = async ({$0, eventTypes}) => {
 
 *be-overloading* invokes onload right away, passing in the element it adorns, and the event type specified in the attribute.  It then detaches itself from memory, as its work is done.
 
+The exampe above is meant to save the developer from a number of common keystrokes.  But for if the developer wants to do anything off the beaten track, we have the following more verbose example:
 
-
-## Example 3 [TODO]
+## Example 2 [TODO]
 
 ```html
 <button be-overloading onload="
-({$0, eventTypes}) => {
+({$0}) => {
     $0.addEventListener('click', e => {
         $0.textContent = 'Try to come to life';
     });
@@ -75,7 +75,7 @@ export const onload = async ({$0, eventTypes}) => {
 ">Tumble out of bed</button>
 ```
 
-What this does behind the scenes:  Since the script begins with an open parenthesis, we apply minimal wrapping, same expanded script as above.  It just adds the async keyword, essentially, and then invokes.  eventTypes will be an empty array in this case.
+What this does behind the scenes:  Since the script begins with an open parenthesis, we apply minimal wrapping.  It just adds the async keyword, essentially, and then invokes.  eventTypes (which the code snippet doesn't even pass in) will be an empty array in this case.
 
 
 This also works:
@@ -83,7 +83,7 @@ This also works:
 ## Example 4 [TODO]
 
 ```html
-<button be-overloading onload="
+<button be-overloading="with click." onload="
 e => {
     $0.textContent = 'Try to come to life';
 }
