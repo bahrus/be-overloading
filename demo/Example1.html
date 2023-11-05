@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div be-overloading='with click.' onload="
+        $0.textContent = 'Try to come to life';
+    "></div>
+    <script type=importmap>
+        {
+            "imports": {
+                "trans-render/": "../node_modules/trans-render/",
+                "xtal-element/": "../node_modules/xtal-element/",
+                "be-enhanced/": "../node_modules/be-enhanced/",
+                "be-hive/":  "../node_modules/be-hive/"
+            }
+        }
+    </script>
+    <script type=module>
+        import '../be-overloading.js'
+    </script>
+</body>
+</html>

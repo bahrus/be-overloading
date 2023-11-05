@@ -75,7 +75,7 @@ The example above is meant to save the developer from a number of common keystro
 ">Tumble out of bed</button>
 ```
 
-What this does behind the scenes:  Since the script begins with an open parenthesis, we apply minimal wrapping.  It just adds the async keyword, essentially, and then invokes.  eventTypes (which the code snippet doesn't even pass in) will be an empty array in this case.
+What this does behind the scenes:  Since the script begins with an open parenthesis, we apply minimal wrapping.  It just adds the async keyword, essentially, and then invokes.  names (which the code snippet doesn't use) will be an empty array in this case.
 
 
 This also works:
