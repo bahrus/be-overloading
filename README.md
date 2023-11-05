@@ -49,44 +49,25 @@ What this does, behind the scenes:
 If the onload text doesn't start with either an open parenthesis, or an open bracket, it does quite a bit of wrapping.  It turns the previous script into:
 
 ```JavaScript
-export const onload = async ({$0}) => {
-    $0.addEventListener('click', e => {
-        $0.textContent = 'Try to come to life';
-    });
+export const onload = async ({$0, eventTypes}) => {
+    for(const eventType of eventTypes){
+        $0.addEventListener(eventType, e => {
+            $0.textContent = 'Try to come to life';
+        });
+    }
+
 }
 ```
 
-*be-overloading* invokes onload right away.  It then detaches itself from memory, as its work is done.
+*be-overloading* invokes onload right away, passing in the element it adorns, and the event type specified in the attribute.  It then detaches itself from memory, as its work is done.
 
-<!--
-If doesn't start with open parenthesis,
-
-export tbd = async $0 => {
-    $0.addEventListener('click', e => {
-        ...
-    })
-    
-} 
-
-and pass in the enhanced element for $0.
--->
-
-If no event is specified, the assumption is on click (except for input element, form element).  So now, in the example below, we present markup that is as close as we will get to using the platform as far as verbosity:
-
-## Example 2 [TODO]
-
-```html
-<button be-overloading onload="
-    $0.textContent = 'Try to come to life';
-">Tumble out of bed</button>
-```
 
 
 ## Example 3 [TODO]
 
 ```html
 <button be-overloading onload="
-({$0}) => {
+({$0, eventTypes}) => {
     $0.addEventListener('click', e => {
         $0.textContent = 'Try to come to life';
     });
@@ -94,11 +75,8 @@ If no event is specified, the assumption is on click (except for input element, 
 ">Tumble out of bed</button>
 ```
 
-<!--
-Starts with open parenthesis, so minimal wrapping:
-export const tbd = async ...
+What this does behind the scenes:  Since the script begins with an open parenthesis, we apply minimal wrapping, same expanded script as above.  It just adds the async keyword, essentially, and then invokes.  eventTypes will be an empty array in this case.
 
--->
 
 This also works:
 
@@ -112,18 +90,10 @@ e => {
 ">Tumble out of bed</button>
 ```
 
-<!--
-Doesn't start with parenthesis,
-starts with e => 
+Here, it doesn't start with parenthesis, but *be-overloading* has special logic that looks for script that looks for e =>
 
-Wrap with 
+It wraps such logic into the same expanded script, yada yada.
 
-export const tbd = async ({$0}) => {
-    $0.addEventListener('click', 
-        ...
-    );
-}
--->
 
 This also works:
 
@@ -135,7 +105,10 @@ e => {
 ">Tumble out of bed</button>
 ```
 
-Both events will invoke the common script.
+Both events (click, mouseover) will invoke the same common script.
+
+The wrapped code looks as follows:
+
 
 This also works:
 
@@ -150,6 +123,12 @@ This also works:
     ]
 ">Tumble out of bed</button>
 ```
+
+Here the script starts with a [].  In this case, it wraps the code as follows:
+
+
+
+
 
 
 
