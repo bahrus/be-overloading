@@ -14,6 +14,7 @@ export class BeOverloading extends BE<AP, Actions> implements Actions{
     }
 
     async onCamelized(self: this): ProPAP {
+        const {} = self;
         return {
             
         }

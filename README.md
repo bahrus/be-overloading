@@ -39,7 +39,7 @@ be-overloading helps with these limitations.
 Not quite as compact as using the platform, but...
 
 ```html
-<button be-overloading="with click." onload="
+<button be-overloading="on click events." onload="
     $0.textContent = 'Try to come to life';
 ">Tumble out of bed</button>
 ```
@@ -49,11 +49,12 @@ What this does, behind the scenes:
 If the onload text doesn't start with either an open parenthesis, or an open bracket, it does quite a bit of wrapping.  It turns the previous script into:
 
 ```JavaScript
-export const onload = async ($0, names, context) => {
-    for(const name of names){
+export const onload = async ($0, context) => {
+    const {events} = context
+    for(const event of events){
         const ab = new AbortController();
-        context.abortControllers[name] = ab;
-        $0.addEventListener(name, e => {
+        context.abortControllers[event] = ab;
+        $0.addEventListener(event, e => {
             $0.textContent = 'Try to come to life';
         }, {signal: ab.signal});
     }
@@ -85,7 +86,7 @@ This also works:
 ## Example 3 [TODO]
 
 ```html
-<button be-overloading="with click." onload="
+<button be-overloading="on click events." onload="
 e => {
     $0.textContent = 'Try to come to life';
 }
@@ -100,9 +101,16 @@ It wraps such logic into the same expanded script, yada yada.
 This also works:
 
 ```html
-<button be-overloading="with click, mouseover." onload="
+<button be-overloading="on click, mouseover events." onload="
 e => {
-    $0.textContent = 'Try to come to life';
+    switch(e.type){
+        case 'click':
+            $0.textContent = 'Try to come to life';
+            break;
+        case 'mouseover':
+            $0.textContent = 'Toss and turn';
+    }
+    
 }
 ">Tumble out of bed</button>
 ```
