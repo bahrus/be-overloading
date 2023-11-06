@@ -4,7 +4,7 @@
 
 Script HTML elements like yore, with support for ES modules.
 
-This works, without any help from be-overloading:
+This works, using only the platform:
 
 ```html
 <button onclick="textContent = 'Try to come to life';"
@@ -46,11 +46,11 @@ Not quite as compact as using the platform, but...
 
 What this does, behind the scenes:
 
-If the onload text doesn't start with either an open parenthesis, or an open bracket, it does quite a bit of wrapping.  It turns the previous script into:
+If the onload text doesn't start with either an open parenthesis, or with e =>, it does quite a bit of wrapping.  It turns the previous script into:
 
 ```JavaScript
 export const onload = async ($0, context) => {
-    const {events} = context
+    const {events} = context; // events = ['click']
     for(const event of events){
         const ab = new AbortController();
         context.abortControllers[event] = ab;
@@ -58,27 +58,26 @@ export const onload = async ($0, context) => {
             $0.textContent = 'Try to come to life';
         }, {signal: ab.signal});
     }
-
 }
 ```
 
 *be-overloading* invokes onload right away, passing in the element it adorns, and the event type specified in the attribute.  It then detaches itself from memory, as its work is done.
 
-The example above is meant to save the developer from a number of common keystrokes.  But for if the developer wants to take the reigns, to do anything off the beaten track, we have the following more verbose example:
+The example above is meant to save the developer from a number of common keystrokes.  But if the developer wants to take the reigns, to do anything off the beaten track, we have the following more verbose example:
 
 ## Example 2 [TODO]
 
 ```html
 <button be-overloading onload="
-($0, names, context) => {
+($0) => {
     $0.addEventListener('click', e => {
-        $0.textContent = 'Try to come to life';
+        $0.textContent = 'Try to come to life.';
     });
 } 
 ">Tumble out of bed</button>
 ```
 
-What this does behind the scenes:  Since the script begins with an open parenthesis, we apply minimal wrapping.  It just adds the async keyword, essentially, and then invokes.  names (which the code snippet doesn't use) will be an empty array in this case.
+What this does behind the scenes:  Since the script begins with an open parenthesis, we apply minimal wrapping.  It just adds the async keyword, essentially, and then invokes.  
 
 
 This also works:
@@ -109,6 +108,7 @@ e => {
             break;
         case 'mouseover':
             $0.textContent = 'Toss and turn';
+            break;
     }
     
 }

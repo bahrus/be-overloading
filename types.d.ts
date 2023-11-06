@@ -2,24 +2,25 @@ import {IBE} from 'be-enhanced/types.js';
 import { ActionOnEventConfigs } from "trans-render/froop/types";
 
 export interface EndUserProps extends IBE{
-    with?:  Array<WithStatement>;
-    With?: Array<WithStatement>;
+    on?:  Array<OnStatement>;
+    On?: Array<OnStatement>;
 }
 
 export interface AllProps extends EndUserProps{
     isParsed?: boolean,
-    withRules: Array<WithRule>
+    onRules: Array<OnRule>
 }
 
-export interface WithRule{
-    names: string[]
+export interface OnRule{
+    names: string[],
+    triggerType?: 'Events' | 'PropChanges'
 }
 
-export interface WithUnParsedRule{
+export interface WithNotFullyParsedRule extends OnRule{
     commaDelimitedNames: string,
 }
 
-export type WithStatement = string;
+export type OnStatement = string;
 
 export type AP = AllProps;
 
