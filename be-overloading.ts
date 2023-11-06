@@ -50,8 +50,9 @@ const xe = new XE<AP, Actions>({
         },
         actions: {
             onCamelized: {
-
-            }
+                ifAllOf: ['isParsed'],
+                ifAtLeastOneOf: ['on', 'On']
+            },
         }
     },
     superclass: BeOverloading

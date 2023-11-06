@@ -40,7 +40,10 @@ const xe = new XE({
             ...propInfo,
         },
         actions: {
-            onCamelized: {}
+            onCamelized: {
+                ifAllOf: ['isParsed'],
+                ifAtLeastOneOf: ['on', 'On']
+            },
         }
     },
     superclass: BeOverloading
