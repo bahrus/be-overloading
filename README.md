@@ -50,13 +50,18 @@ If the onload text doesn't start with either an open parenthesis, or with e =>, 
 
 ```JavaScript
 export const onload = async ($0, context) => {
+    const fn = () => {
+        $0.textContent = 'Try to come to life';
+    }
     const {events} = context; // events = ['click']
-    for(const event of events){
-        const ab = new AbortController();
-        context.abortControllers[event] = ab;
-        $0.addEventListener(event, e => {
-            $0.textContent = 'Try to come to life';
-        }, {signal: ab.signal});
+    if(events !== undefined){
+        for(const event of events){
+            const ab = new AbortController();
+            context.abortControllers[event] = ab;
+            $0.addEventListener(event, e => {
+                fn();
+            }, {signal: ab.signal});
+        }
     }
 }
 ```
@@ -124,6 +129,66 @@ The developer can add conditional logic within to do different things based on w
 If attaching event listeners to remote elements and/or mutation observers, it is probably a good idea to clean up those listeners.  The challenge is where to store the signals?
 
 That is one of the uses of the "context" parameter.
+
+## Example 5  With expressions [TODO]
+
+[be-computed](https://github.com/bahrus/be-computed) makes use of another feature (behind the scenes):
+
+```html
+<div be-overloading="
+    with line1=`Barely gettin' by, it's all takin' and no givin'`.
+    With line2=`They just use your mind`.
+    With line3=`And you never get the credit`.
+    With line4=`It's enough to drive you crazy if you let it`.
+    "
+    onload="
+        const html = String.raw;
+        const stanza = html`
+            <div>${line1}</div>
+            <div>${line2}</div>
+            <div>${line3}</div>
+            <div>${line4}</div>
+        `;
+        $0.firstChild.innerHTML = stanza;
+        return stanza;
+>
+    <section></section>
+</div>
+```
+
+What this does, behind the scenes:
+
+```JavaScript
+export const onload = async ($0, context) => {
+    const line1 = `Barely gettin' by, it's all takin' and no givin'`;
+    const line2 = `They just use your mind`;
+    const line3 = `And you never get the credit`;
+    const line4 = `It's enough to drive you crazy if you let it`;
+    const fn = () => {
+        const html = String.raw;
+        const stanza = html`
+            <div>${line1}</div>
+            <div>${line2}</div>
+            <div>${line3}</div>
+            <div>${line4}</div>
+        `;
+        $0.firstChild.innerHTML = stanza;
+        return stanza;
+    }
+    const {events} = context; // events = ['click']
+    if(events !== undefined){
+        for(const event of events){
+            const ab = new AbortController();
+            context.abortControllers[event] = ab;
+            $0.addEventListener(event, e => {
+                fn();
+            }, {signal: ab.signal});
+        }
+    }else{
+        fn();
+    }
+}
+```
 
 
 
