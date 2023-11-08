@@ -42,7 +42,6 @@ export class BeOverloading extends BE<AP, Actions, HTMLElement> implements Actio
         //const {onload} = (enhancedElement as HTMLElement);
         //const onloadStr = onload?.toString();
         const onloadAttr = enhancedElement.getAttribute('onload')?.trim();
-        console.log({onloadAttr});
         let wrappedJS: string | undefined;
         if(onloadAttr?.startsWith('(')){
             wrappedJS = `export const onload = async ${onloadAttr}
@@ -84,7 +83,6 @@ export class BeOverloading extends BE<AP, Actions, HTMLElement> implements Actio
         }
         const {onload} = exports;
         await onload(enhancedElement, context)
-        console.log({exports});
         return {
             resolved: true,
         }
