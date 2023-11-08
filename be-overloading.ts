@@ -48,7 +48,17 @@ export class BeOverloading extends BE<AP, Actions, HTMLElement> implements Actio
             wrappedJS = `export const onload = async ${onloadAttr}
             `;
         }else if(onloadAttr?.startsWith('e =>')){
-            throw 'NI';
+            wrappedJS = `export const onload = async ($0, context) => {
+                const fn = ${onloadAttr}
+                const {events} = context; // events = ['click']
+                if(events !== undefined){
+                    for(const event of events){
+                        const ab = new AbortController();
+                        context.abortControllers[event] = ab;
+                        $0.addEventListener(event, fn, {signal: ab.signal});
+                    }
+                }
+            }`;
         }else{
             wrappedJS = `export const onload = async ($0, context) => {
                 const fn = () => {
