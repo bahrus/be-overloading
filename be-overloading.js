@@ -1,6 +1,7 @@
 import { BE, propDefaults, propInfo } from 'be-enhanced/BE.js';
 import { XE } from 'xtal-element/XE.js';
 import { register } from 'be-hive/register.js';
+import { parse } from 'be-exporting/be-exporting.js';
 export class BeOverloading extends BE {
     static get beConfig() {
         return {
@@ -21,6 +22,36 @@ export class BeOverloading extends BE {
         };
     }
     async hydrate(self) {
+        const { onRules, enhancedElement } = self;
+        const names = onRules.flat();
+        //const {onload} = (enhancedElement as HTMLElement);
+        //const onloadStr = onload?.toString();
+        const onloadAttr = enhancedElement.getAttribute('onload')?.trim();
+        console.log({ onloadAttr });
+        if (onloadAttr?.startsWith('(')) {
+            throw 'NI';
+        }
+        else if (onloadAttr?.startsWith('e =>')) {
+        }
+        else {
+            const wrappedJS = `export const onload = async ($0, context) => {
+                const fn = () => {
+                    ${onloadAttr}
+                }
+                const {events} = context; // events = ['click']
+                if(events !== undefined){
+                    for(const event of events){
+                        const ab = new AbortController();
+                        context.abortControllers[event] = ab;
+                        $0.addEventListener(event, e => {
+                            fn();
+                        }, {signal: ab.signal});
+                    }
+                }
+            }`;
+            const exports = await parse(wrappedJS);
+            console.log({ exports });
+        }
         return {
             resolved: true,
         };
@@ -44,6 +75,7 @@ const xe = new XE({
                 ifAllOf: ['isParsed'],
                 ifAtLeastOneOf: ['on', 'On']
             },
+            hydrate: 'onRules'
         }
     },
     superclass: BeOverloading

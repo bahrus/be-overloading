@@ -1,7 +1,7 @@
 import {IBE} from 'be-enhanced/types.js';
 import { ActionOnEventConfigs } from "trans-render/froop/types";
 
-export interface EndUserProps extends IBE{
+export interface EndUserProps extends IBE<HTMLElement>{
     on?:  Array<OnStatement>;
     On?: Array<OnStatement>;
 }
