@@ -70,7 +70,7 @@ export const onload = async ($0, context) => {
 
 The example above is meant to save the developer from a number of common keystrokes.  But if the developer wants to take the reigns, to do anything off the beaten track, we have the following more verbose example:
 
-## Example 2 [TODO]
+## Example 2
 
 ```html
 <button be-overloading onload="

@@ -36,14 +36,16 @@ export class BeOverloading extends BE {
         //const onloadStr = onload?.toString();
         const onloadAttr = enhancedElement.getAttribute('onload')?.trim();
         console.log({ onloadAttr });
+        let wrappedJS;
         if (onloadAttr?.startsWith('(')) {
-            throw 'NI';
+            wrappedJS = `export const onload = async ${onloadAttr}
+            `;
         }
         else if (onloadAttr?.startsWith('e =>')) {
             throw 'NI';
         }
         else {
-            const wrappedJS = `export const onload = async ($0, context) => {
+            wrappedJS = `export const onload = async ($0, context) => {
                 const fn = () => {
                     ${onloadAttr}
                 }
@@ -58,15 +60,15 @@ export class BeOverloading extends BE {
                     }
                 }
             }`;
-            const exports = await parse(wrappedJS);
-            const context = {
-                events: names,
-                abortControllers: []
-            };
-            const { onload } = exports;
-            await onload(enhancedElement, context);
-            console.log({ exports });
         }
+        const exports = await parse(wrappedJS);
+        const context = {
+            events: names,
+            abortControllers: []
+        };
+        const { onload } = exports;
+        await onload(enhancedElement, context);
+        console.log({ exports });
         return {
             resolved: true,
         };
