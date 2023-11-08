@@ -21,6 +21,11 @@ export class BeOverloading extends BE {
             onRules
         };
     }
+    async noAttrs(self) {
+        return {
+            onRules: []
+        };
+    }
     async hydrate(self) {
         const { onRules, enhancedElement } = self;
         let names = [];
@@ -35,6 +40,7 @@ export class BeOverloading extends BE {
             throw 'NI';
         }
         else if (onloadAttr?.startsWith('e =>')) {
+            throw 'NI';
         }
         else {
             const wrappedJS = `export const onload = async ($0, context) => {
@@ -80,6 +86,10 @@ const xe = new XE({
             ...propInfo,
         },
         actions: {
+            noAttrs: {
+                ifAllOf: ['isParsed'],
+                ifNoneOf: ['on', 'On']
+            },
             onCamelized: {
                 ifAllOf: ['isParsed'],
                 ifAtLeastOneOf: ['on', 'On']

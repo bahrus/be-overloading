@@ -26,6 +26,12 @@ export class BeOverloading extends BE<AP, Actions, HTMLElement> implements Actio
         }
     }
 
+    async noAttrs(self: this): ProPAP {
+        return {
+            onRules: []
+        }
+    }
+
     async hydrate(self: this): ProPAP {
         const {onRules, enhancedElement} = self;
         let names: Array<string> = [];
@@ -40,7 +46,7 @@ export class BeOverloading extends BE<AP, Actions, HTMLElement> implements Actio
         if(onloadAttr?.startsWith('(')){
             throw 'NI';
         }else if(onloadAttr?.startsWith('e =>')){
-
+            throw 'NI';
         }else{
             const wrappedJS = `export const onload = async ($0, context) => {
                 const fn = () => {
@@ -89,6 +95,10 @@ const xe = new XE<AP, Actions>({
             ...propInfo,
         },
         actions: {
+            noAttrs: {
+                ifAllOf: ['isParsed'],
+                ifNoneOf: ['on', 'On']
+            },
             onCamelized: {
                 ifAllOf: ['isParsed'],
                 ifAtLeastOneOf: ['on', 'On']

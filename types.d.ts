@@ -33,4 +33,5 @@ export type POA = [PAP | undefined, ActionOnEventConfigs<PAP, Actions>];
 export interface Actions{
     onCamelized(self: this): ProPAP;
     hydrate(self: this): ProPAP;
+    noAttrs(self: this): ProPAP;
 }
