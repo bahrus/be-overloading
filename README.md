@@ -1,4 +1,4 @@
-# be-overloading [TODO]
+# be-overloading [WIP]
 
 ## Working like it's '95
 
@@ -34,7 +34,7 @@ But:
 
 be-overloading helps with these limitations.
 
-## Example 1 [TODO]
+## Example 1 
 
 Not quite as compact as using the platform, but...
 
