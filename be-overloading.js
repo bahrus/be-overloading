@@ -23,7 +23,10 @@ export class BeOverloading extends BE {
     }
     async hydrate(self) {
         const { onRules, enhancedElement } = self;
-        const names = onRules.flat();
+        let names = [];
+        for (const onRule of onRules) {
+            names = names.concat(onRule.names);
+        }
         //const {onload} = (enhancedElement as HTMLElement);
         //const onloadStr = onload?.toString();
         const onloadAttr = enhancedElement.getAttribute('onload')?.trim();
@@ -50,6 +53,12 @@ export class BeOverloading extends BE {
                 }
             }`;
             const exports = await parse(wrappedJS);
+            const context = {
+                events: names,
+                abortControllers: []
+            };
+            const { onload } = exports;
+            await onload(enhancedElement, context);
             console.log({ exports });
         }
         return {

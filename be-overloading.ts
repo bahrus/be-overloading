@@ -28,7 +28,11 @@ export class BeOverloading extends BE<AP, Actions, HTMLElement> implements Actio
 
     async hydrate(self: this): ProPAP {
         const {onRules, enhancedElement} = self;
-        const names = onRules.flat();
+        let names: Array<string> = [];
+        for(const onRule of onRules){
+            names = names.concat(onRule.names);
+        }
+        
         //const {onload} = (enhancedElement as HTMLElement);
         //const onloadStr = onload?.toString();
         const onloadAttr = enhancedElement.getAttribute('onload')?.trim();
@@ -54,6 +58,12 @@ export class BeOverloading extends BE<AP, Actions, HTMLElement> implements Actio
                 }
             }`;
             const exports = await parse(wrappedJS);
+            const context = {
+                events: names,
+                abortControllers: []
+            }
+            const {onload} = exports;
+            await onload(enhancedElement, context)
             console.log({exports});
         }
         return {
