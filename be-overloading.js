@@ -11,11 +11,11 @@ export class BeOverloading extends BE {
         };
     }
     async onCamelized(self) {
-        const { on, On } = self;
+        const { of, Of } = self;
         let onRules = [];
-        if ((on || On) !== undefined) {
-            const { prsOn } = await import('./prsOn.js');
-            onRules = prsOn(self);
+        if ((of || Of) !== undefined) {
+            const { prsOf } = await import('./prsOf.js');
+            onRules = prsOf(self);
         }
         return {
             onRules
@@ -98,11 +98,11 @@ const xe = new XE({
         actions: {
             noAttrs: {
                 ifAllOf: ['isParsed'],
-                ifNoneOf: ['on', 'On']
+                ifNoneOf: ['of', 'Of']
             },
             onCamelized: {
                 ifAllOf: ['isParsed'],
-                ifAtLeastOneOf: ['on', 'On']
+                ifAtLeastOneOf: ['of', 'Of']
             },
             hydrate: 'onRules'
         }

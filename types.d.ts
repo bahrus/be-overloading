@@ -2,8 +2,8 @@ import {IBE} from 'be-enhanced/types.js';
 import { ActionOnEventConfigs } from "trans-render/froop/types";
 
 export interface EndUserProps extends IBE<HTMLElement>{
-    on?:  Array<OnStatement>;
-    On?: Array<OnStatement>;
+    of?:  Array<OnStatement>;
+    Of?: Array<OnStatement>;
 }
 
 export interface AllProps extends EndUserProps{
@@ -13,7 +13,7 @@ export interface AllProps extends EndUserProps{
 
 export interface OnRule{
     names: string[],
-    triggerType?: 'Events' | 'PropChanges'
+    triggerType?: 'Event' | 'Events' | 'PropChanges'
 }
 
 export interface WithNotFullyParsedRule extends OnRule{
