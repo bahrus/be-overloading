@@ -34,12 +34,12 @@ But:
 
 be-overloading helps with these limitations.
 
-## Example 1 
+## Example 1 [TODO]
 
 Not quite as compact as using the platform, but...
 
 ```html
-<button be-overloading="on click events." onload="
+<button be-overloading="of click event." onload="
     $0.textContent = 'Try to come to life';
 ">Tumble out of bed</button>
 ```
@@ -87,10 +87,10 @@ What this does behind the scenes:  Since the script begins with an open parenthe
 
 This also works:
 
-## Example 3
+## Example 3 [TODO]
 
 ```html
-<button be-overloading="on click events." onload="
+<button be-overloading="of click event." onload="
 e => {
     $0.textContent = 'Try to come to life';
 }
@@ -105,7 +105,7 @@ It wraps such logic into the same expanded script, yada yada.
 This also works:
 
 ```html
-<button be-overloading="on click, mouseover events." onload="
+<button be-overloading="of click, mouseover events." onload="
 e => {
     switch(e.type){
         case 'click':
@@ -124,7 +124,7 @@ Both events (click, mouseover) will invoke the same common script.
 
 The developer can add conditional logic within to do different things based on which event type was triggered.
 
-## Example 4 OnUnload
+## Example 4 OnUnload [TODO]
 
 If attaching event listeners to remote elements and/or mutation observers, it is probably a good idea to clean up those listeners.  The challenge is where to store the signals?
 
