@@ -1,4 +1,4 @@
-import { tryParse } from 'be-enhanced/cpu.js';
+import { tryParse, lc } from 'be-enhanced/cpu.js';
 const reOfWithStatement = [
     {
         regExp: new RegExp(String.raw `^(?<commaDelimitedNames>.*)Events`),
@@ -24,7 +24,7 @@ export function prsOf(self) {
         const { commaDelimitedNames, triggerType } = test;
         switch (triggerType) {
             case 'Events': {
-                const names = commaDelimitedNames.split(',').map(x => x.trim());
+                const names = commaDelimitedNames.split(',').map(x => lc(x.trim()));
                 exportingRules.push({
                     names,
                 });

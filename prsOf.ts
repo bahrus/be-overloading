@@ -1,6 +1,6 @@
 import {AP, ProPAP, PAP, OnRule, WithNotFullyParsedRule} from './types';
 import {RegExpOrRegExpExt} from 'be-enhanced/types';
-import {arr, tryParse} from 'be-enhanced/cpu.js';
+import {arr, tryParse, lc} from 'be-enhanced/cpu.js';
 
 const reOfWithStatement: Array<RegExpOrRegExpExt<Partial<OnRule>>> = [
     {
@@ -28,7 +28,7 @@ export function prsOf(self: AP) : Array<OnRule> {
         const {commaDelimitedNames, triggerType} = test;
         switch(triggerType){
             case 'Events':{
-                const names = commaDelimitedNames.split(',').map(x => x.trim());
+                const names = commaDelimitedNames.split(',').map(x => lc(x.trim()));
                 exportingRules.push({
                     names,
                 });

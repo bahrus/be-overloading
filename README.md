@@ -34,7 +34,7 @@ But:
 
 be-overloading helps with these limitations.
 
-## Example 1 [TODO]
+## Example 1
 
 Not quite as compact as using the platform, but...
 
