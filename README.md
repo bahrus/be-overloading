@@ -124,13 +124,13 @@ Both events (click, mouseover) will invoke the same common script.
 
 The developer can add conditional logic within to do different things based on which event type was triggered.
 
-## Example 4 OnUnload [TODO]
+## Example 4 OnUnload [TODO] -- Need strong use case
 
 If attaching event listeners to remote elements and/or mutation observers, it is probably a good idea to clean up those listeners.  The challenge is where to store the signals?
 
 That is one of the uses of the "context" parameter.
 
-## Example 5  With expressions [TODO]
+## Example 5  With expressions [TODO] -- Need strong use case
 
 [be-computed](https://github.com/bahrus/be-computed) makes use of another feature (behind the scenes):
 
