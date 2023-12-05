@@ -87,7 +87,7 @@ What this does behind the scenes:  Since the script begins with an open parenthe
 
 This also works:
 
-## Example 3 [TODO]
+## Example 3
 
 ```html
 <button be-overloading="of click event." onload="
