@@ -3,7 +3,7 @@ import {BEConfig} from 'be-enhanced/types';
 import {XE} from 'xtal-element/XE.js';
 import {Actions, AllProps, AP, PAP, ProPAP, POA, OnRule} from './types';
 import {register} from 'be-hive/register.js';
-import {parse} from 'be-exporting/be-exporting.js'
+import {parse} from 'be-exporting/be-exporting.js';
 
 export class BeOverloading extends BE<AP, Actions, HTMLElement> implements Actions{
     static override get beConfig(){
