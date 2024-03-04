@@ -9,7 +9,7 @@
 		"lib": ["ESNext", "ESNext.String", "DOM"]
 	},
 	"files":[
-		"be-overloading.ts"
+		"behivior.ts"
 
 	],
 	"exclude":[

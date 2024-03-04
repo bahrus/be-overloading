@@ -2,7 +2,6 @@ import {BE, propDefaults, propInfo} from 'be-enhanced/BE.js';
 import {BEConfig} from 'be-enhanced/types';
 import {XE} from 'xtal-element/XE.js';
 import {Actions, AllProps, AP, PAP, ProPAP, POA, OnRule} from './types';
-import {register} from 'be-hive/register.js';
 import {parse} from 'be-exporting/be-exporting.js';
 
 export class BeOverloading extends BE<AP, Actions, HTMLElement> implements Actions{
@@ -91,9 +90,8 @@ export class BeOverloading extends BE<AP, Actions, HTMLElement> implements Actio
 
 export interface BeOverloading extends AllProps{}
 
-const tagName = 'be-overloading'
-const ifWantsToBe = 'overloading';
-const upgrade = '*';
+export const tagName = 'be-overloading'
+
 
 const xe = new XE<AP, Actions>({
     config:{
@@ -120,6 +118,5 @@ const xe = new XE<AP, Actions>({
     superclass: BeOverloading
 });
 
-register(ifWantsToBe, upgrade, tagName);
 
 

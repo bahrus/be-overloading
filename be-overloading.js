@@ -1,6 +1,5 @@
 import { BE, propDefaults, propInfo } from 'be-enhanced/BE.js';
 import { XE } from 'xtal-element/XE.js';
-import { register } from 'be-hive/register.js';
 import { parse } from 'be-exporting/be-exporting.js';
 export class BeOverloading extends BE {
     static get beConfig() {
@@ -82,9 +81,7 @@ export class BeOverloading extends BE {
         };
     }
 }
-const tagName = 'be-overloading';
-const ifWantsToBe = 'overloading';
-const upgrade = '*';
+export const tagName = 'be-overloading';
 const xe = new XE({
     config: {
         tagName,
@@ -109,4 +106,3 @@ const xe = new XE({
     },
     superclass: BeOverloading
 });
-register(ifWantsToBe, upgrade, tagName);
